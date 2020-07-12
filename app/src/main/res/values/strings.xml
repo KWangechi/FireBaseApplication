@@ -10,5 +10,6 @@
     <string name="previous">Previous</string>
     <string name="addpost">Add your Post here</string>
     <string name="set_profile">Set your user profile here</string>
+    <string name="single_post_name">Single Post Acivity</string>
 
 </resources>

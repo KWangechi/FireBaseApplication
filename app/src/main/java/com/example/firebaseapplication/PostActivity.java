@@ -107,7 +107,7 @@ private Button postBtn;
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             final String imageUri = uri.toString();
-                                            Toast.makeText(PostActivity.this, "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"Successfully uploaded", Toast.LENGTH_SHORT).show();
                              final DatabaseReference newPost = databaseReference.push();
 
                              mDatabaseUsers.addValueEventListener(new ValueEventListener() {

@@ -22,10 +22,11 @@ import com.squareup.picasso.Picasso;
 public class SinglePostActivity extends AppCompatActivity {
 private ImageView singleImage;
 private TextView singleTitle, singleDesc;
+String postKey = null;
 private DatabaseReference mDataBase;
 private Button deleteBtn;
 private FirebaseAuth mAuth;
-String postKey = null;
+
 
 
     @Override
@@ -41,6 +42,8 @@ String postKey = null;
         postKey = getIntent().getExtras().getString("PostID");
         deleteBtn = findViewById(R.id.deleteBtn);
         deleteBtn.setVisibility(View.INVISIBLE);
+        mAuth = FirebaseAuth.getInstance();
+
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +52,8 @@ String postKey = null;
                 startActivity(mainIntent);
             }
         });
-mDataBase.child("Posts").addValueEventListener(new ValueEventListener() {
+
+mDataBase.child(postKey).addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         String post_title= (String) dataSnapshot.child("title").getValue();
@@ -57,16 +61,15 @@ mDataBase.child("Posts").addValueEventListener(new ValueEventListener() {
         String post_image= (String) dataSnapshot.child("postImage").getValue();
         String post_id= (String) dataSnapshot.child("uid").getValue();
 
+
+
         singleTitle.setText(post_title);
         singleDesc.setText(post_desc);
         Picasso.with(SinglePostActivity.this).load(post_image).into(singleImage);
-        if(mAuth.getCurrentUser().getUid().equals(post_id)){
+        if(mAuth.getInstance().getCurrentUser().getUid().equals(post_id)){
             deleteBtn.setVisibility(View.VISIBLE);
 
         }
-
-
-
     }
 
     @Override

@@ -97,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public Attic parseSnapshot(@NonNull DataSnapshot snapshot) {
                         return new Attic((String) snapshot.child("title").getValue(),
-                                snapshot.child("description").getValue(),
-                                snapshot.child("postImage").getValue(),
-                                snapshot.child("displayName").getValue(),
-                                snapshot.child("profilePhoto").getValue(),
-                                snapshot.child("time").getValue(),
-                                snapshot.child("date").getValue());
+                                (String) snapshot.child("description").getValue(),
+                                (String) snapshot.child("postImage").getValue(),
+                                (String) snapshot.child("displayName").getValue(),
+                                (String) snapshot.child("profilePhoto").getValue(),
+                                (String) snapshot.child("time").getValue(),
+                                (String) snapshot.child("date").getValue());
                     }
                 }).build();
 
@@ -115,9 +115,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull AtticViewHolder holder, int position, @NonNull Attic model) {
+            public void onBindViewHolder(@NonNull AtticViewHolder holder, int position, @NonNull Attic model) {
                 final String postKey = getRef(position).getKey();
-
                 holder.setTitle(model.getTitle());
                 holder.setDescription(model.getDescription());
                 holder.setPostImage(getApplicationContext(), model.getPostImage());
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                     public void onClick(View view){
                     Intent singlePost = new Intent(MainActivity.this, SinglePostActivity.class);
-                    singlePost.putExtra("Post ID", postKey);
+                    singlePost.putExtra("PostID", postKey);
                     startActivity(singlePost);
 
                 }
@@ -173,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }
+
+
                 });
 
 
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop(){
+    public void onStop(){
         super.onStop();
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
@@ -315,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if(id == R.id.action_add){
-            Intent postIntent = new Intent(this, PostActivity.class);
+            Intent postIntent = new Intent(MainActivity.this, PostActivity.class);
             startActivity(postIntent);
         }
 

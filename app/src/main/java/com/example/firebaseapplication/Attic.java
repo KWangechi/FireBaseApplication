@@ -14,7 +14,7 @@ public class Attic {
         this.date = date;
     }
 
-    public Attic(String title, Object description, Object postImage, Object displayName, Object profilePhoto, Object time, Object date){
+    public Attic(){
 
     }
 

@@ -72,6 +72,7 @@ private Button loginBtn;
         });
     }
 
+
     private void checkUserExistence() {
 final String user_id = mAuth.getCurrentUser().getUid();
 
